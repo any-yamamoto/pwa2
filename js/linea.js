@@ -1,4 +1,4 @@
-const d = document;
+
 let linea = d.getElementById('linea');
 window.addEventListener('offline', event => {
     console.log("estoy sin conexion!!");
