@@ -12,6 +12,7 @@ if (miListaLocal != null) {
     
 }
 
+
 function buscarPeliculas(busqueda)
 {
     fetch (
@@ -24,6 +25,7 @@ function buscarPeliculas(busqueda)
             console.log('Funciona');
             mostrarPelicula(datos);
             console.log(datos);
+           
             return datos;
             
         }
@@ -39,6 +41,7 @@ function buscarPeliculas(busqueda)
 
 if (buscador != null) {
     buscador.addEventListener("change", function() {
+       
         buscarPeliculas(buscador.value);
     });
     }
@@ -190,5 +193,118 @@ function crearPelicula() {
 
     
     function mostrarMiLista(miListaLocal){
+        
+        for(datos of miListaLocal){
+        let tarjeta = d.createElement('div');
+        tarjeta.className = ('card my-5 p-3');
+        tarjeta.setAttribute('id', 'tarjeta');    
+     
+       
+            let div1 = d.createElement('div');
+            div1.className = ('row g-0');
+            
+            tarjeta.appendChild(div1);
 
-    }
+              let div2 = d.createElement('div');
+              div2.className = ('col-md-8');
+              div1.appendChild(div2);
+
+                let div3 = d.createElement('div');
+                div3.className = ('card-body text-start');
+                div2.appendChild(div3);
+
+                let titulo = d.createElement('h1');
+                titulo.className = ('card-title');
+                titulo.setAttribute('id', 'titulo');
+                div3.appendChild(titulo);
+
+                let anio = d.createElement('h4');
+                anio.className = ('card-text');
+                anio.setAttribute('id', 'anio');
+                div3.appendChild(anio);
+
+                let genero = d.createElement('p');
+                genero.className = ('card-text');
+                genero.setAttribute('id', 'genero');
+                div3.appendChild(genero);
+
+
+                let sinopsis = d.createElement('p');
+                sinopsis.className = ('card-text');
+                sinopsis.setAttribute('id', 'sinopsis');
+                div3.appendChild(sinopsis);
+
+
+                let director = d.createElement('p');
+                director.className = ('card-text');
+                director.setAttribute('id', 'director');
+                div3.appendChild(director);
+
+                let score = d.createElement('span');
+                score.className = ('card-text');
+                div3.appendChild(score);
+
+                let small = d.createElement('small');
+                small.className = ('text-muted');
+                small.setAttribute('id', 'small');
+                score.appendChild(small);
+
+                
+
+                let div4 = d.createElement('div');
+                div4.className = ('col-md-4');
+                div1.appendChild(div4);
+  
+                let poster = d.createElement('img');
+                poster.className = ('img-fluid rounded-start');
+                poster.setAttribute('id', 'poster');
+                div4.appendChild(poster);
+
+                let botonAgregar = d.createElement('a');
+                botonAgregar.className = ('btn ml-5 mt-5 color espacio');
+                botonAgregar.setAttribute('id', 'botonAgregar');
+                div3.appendChild(botonAgregar);
+
+                mainLista.appendChild(tarjeta);
+    
+            titulo.innerHTML = (datos.Title);
+            anio.innerHTML = (datos.Year);
+            genero.innerHTML = (datos.Genre);
+            sinopsis.innerHTML = (datos.Plot);
+            director.innerHTML = (`Director: ${datos.Director}`);
+            small.innerHTML = (`Score: ${datos.Metascore}`);
+            poster.setAttribute('src', `${datos.Poster}`);
+           
+            var inicio = false
+           if(inicio == true){
+            botonAgregar.innerHTML = (`Agregar a Mi Lista`);
+           }else{ botonAgregar.innerHTML = (`Quitar de  Mi Lista`);}
+          
+          botonAgregar.addEventListener("click", (e) => {
+    
+           let verificacion = 0;
+            
+            for (let peli of miLista) {
+    
+                if(peli.Title === datos.Title && verificacion === 0){
+                    botonAgregar.innerHTML = (`Agregar a Mi Lista`);
+                    let index = miLista.indexOf(peli);
+                    verificacion = 1;
+                   borrarMiLista(index);
+                }
+            }
+    
+            if (verificacion == 0) {
+                e.target.innerHTML = (`Quitar de Mi Lista`);
+                agregarMiLista(datos);
+            }
+          });
+          
+         
+    
+    
+        }
+      
+        }
+    
+        
